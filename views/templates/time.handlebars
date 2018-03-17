@@ -1,0 +1,8 @@
+<div class="time" data-id="{{response._id}}">
+    <p>{{response.date.day}}/{{response.date.month}}</p>
+    <p>Från: {{response.from.hour}}:{{response.from.minute}} Till: {{response.to.hour}}:{{response.to.minute}}</p>
+    {{#if response.add.comment}}
+    <p>Kommentar: {{response.add.comment}}</p>
+    {{/if}}
+    <span class="remove-time">X</span>
+</div>

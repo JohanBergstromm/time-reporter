@@ -1,9 +1,64 @@
-<h2>Tidsrapportera</h2>
-<div class="navigation">
-    <nav>
-        <ul>
-            <li><a href="/">Hem</a></li>
-            <li><a href="/time-report">Tidsrapportera</a></li>
-        </ul>
-    </nav>
+<div class="main-wrap time-report">
+    <div class="col-xs-12">
+        <h2>Tidsrapportera</h2>
+    </div>
+    <form class="time-form" method="post">
+        <div class="col-xs-6">
+            <div class="from-wrap">
+                <h4>Från</h4>
+                <span>Timme</span>
+                <select id="fh" name="fromHour">
+                    {{> form-hours}}
+                </select>
+                <span>Minut</span>
+                <select id="fm" name="fromMin">
+                    {{> form-minutes}}
+                </select>
+            </div>
+            <div class="to-wrap">
+            <h4>Till</h4> 
+                <span>Timme</span>
+                <select id="th" name="toHour">
+                    {{> form-hours}}
+                </select>
+                <span>Minut</span>
+                <select id="tm" name="toMin">
+                    {{> form-minutes}}
+                </select>
+            </div>
+            <div class="date-wrap">
+                <h4>Datum</h4>
+                <span>Månad</span>
+                <select id="month" name="month">
+                    {{> form-month}}
+                </select>
+                <span>Dag</span>
+                <select id="day" name="day">
+                    {{> form-day}}
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="comment-wrap">
+                <h4>Kommentar</h4>
+                <textarea id="comment" name="comment"></textarea>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <button type="submit">Lägg till</button>
+        </div>
+    </form>
+    <div class="divider"></div>
+    <div class="time-wrap col-xs-12">
+        {{#each times}}
+            <div class="time" data-id="{{this._id}}">
+                <p>{{this.date.day}}/{{this.date.month}}</p>
+                <p>Från: {{this.from.hour}}:{{this.from.minute}} Till: {{this.to.hour}}:{{this.to.minute}}</p>
+                {{#if this.add.comment}}
+                    <p>Kommentar: {{this.add.comment}}</p>
+                {{/if}}
+                <span class="remove-time">X</span>
+            </div>
+        {{/each}}
+    </div>
 </div>

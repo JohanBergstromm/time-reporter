@@ -13,22 +13,21 @@ import index from 'routes/index';
 import timeReport from 'routes/time-report';
 
 // Connect to mongodb
-// const dbUrl = 'mongodb://localhost/time';
+const dbUrl = 'mongodb://localhost/time-reporter';
 
-// mongoose.connect(dbUrl);
+mongoose.connect(dbUrl);
 
-// mongoose.connection.on('open', () => {
-//     console.log('Connected to mongo server.')
-// }).on('error', (err) => {
-//     console.log('Could not connect to mongo server.', err);
-// });
+mongoose.connection.on('open', () => {
+    console.log('Connected to mongo server.')
+}).on('error', (err) => {
+    console.log('Could not connect to mongo server.', err);
+});
 
 // Create an express instance.
 const app = express();
 
 // Set handlebars as the view engine.
 const viewsDir = path.join(__dirname, 'views');
-
 app.set('views', viewsDir);
 app.engine('handlebars', exphbs({
     defaultLayout: 'main',
@@ -39,6 +38,7 @@ app.set('view engine', 'handlebars');
 
 // Setup static paths
 app.use('/handlebars', express.static(path.join(__dirname, 'node_modules/handlebars')));
+// app.use('/templates', express.static(path.join(__dirname, 'public/templates')));
 
 // Set the public-folder to static.
 app.use(express.static('public'));
