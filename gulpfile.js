@@ -26,3 +26,8 @@ gulp.task('js', function() {
 gulp.task('js:watch', function() {
     gulp.watch('script/**/*.js', ['js']);
 });
+
+gulp.task('watch:all', function() {
+    gulp.watch('script/**/*.js', ['js']);
+    gulp.watch('./public/scss/**/*.scss', ['scss']);
+});
