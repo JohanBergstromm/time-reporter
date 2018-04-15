@@ -1,0 +1,23 @@
+<div class="main-wrap">
+    <div class="col-12">
+    	<div class="row">
+    		<h1>Tidsbank</h1>
+    	</div>
+    </div>
+    <div class="time-bank">
+    	<div class="row">
+	    	{{#each storages}}
+	        <div class="col-3" data-id="{{this._id}}">
+	        	<h3>{{this.month}}</h3>
+	        </div>
+	        {{/each}}
+	    </div>
+    	<div class="days">
+    		<div class="row">
+    			{{> days}}
+    		</div>
+        </div>
+        <div class="data-holder">
+        </div>
+    </div>
+</div>

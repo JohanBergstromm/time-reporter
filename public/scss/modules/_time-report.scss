@@ -1,40 +1,41 @@
-.time-report {
-    .time-form {
-        h4 {
-            margin-top: 20px;
-        }
-        select {
-            margin: 0 10px;
-        }
-        button {
-            display: block;
-        }
-        .comment-wrap {
-            textarea {
-                height: 30px;
-                width: 70%;
-                resize: none;
-            }
+.time-form {
+    h4 {
+        margin-top: 20px;
+    }
+    select {
+        margin: 0 10px;
+    }
+    button {
+        display: block;
+    }
+    .comment-wrap {
+        textarea {
+            height: 30px;
+            width: 70%;
+            resize: none;
         }
     }
-    .time-item {
-        .date {
-            p {
-                display: inline-block;
-            }
-        }
-        .remove-time {
+}
+
+.time-item {
+    .date {
+        p {
             display: inline-block;
-            &:hover {
-                cursor: pointer;
-            }
         }
     }
-    .day {
-        display: flex;
-        flex-wrap: wrap;
-        &:empty {
-            display: none;
+    .remove-time {
+        display: inline-block;
+        &:hover {
+            cursor: pointer;
         }
+    }
+}
+
+.day {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    &:empty {
+        display: none;
     }
 }

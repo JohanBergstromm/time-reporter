@@ -1,0 +1,26 @@
+@charset "UTF-8";
+@font-face {
+	font-family: 'Butler';
+	src: url('../../fonts/butler_black_stencil-webfont.woff2') format('woff2'), url('../../fonts/butler_black_stencil-webfont.woff') format('woff');
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: 'Butler Bold';
+	src: url('../../fonts/butler_bold_stencil-webfont.woff2') format('woff2'), url('../../fonts/butler_bold_stencil-webfont.woff') format('woff');
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: 'Butler Light';
+	src: url('../../fonts/butler_light_stencil-webfont.woff2') format('woff2'), url('../../fonts/butler_light_stencil-webfont.woff') format('woff');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Butler Reg';
+	src: url('../../fonts/butler_regular_stencil-webfont.woff2') format('woff2'), url('../../fonts/butler_regular_stencil-webfont.woff') format('woff');
+	font-weight: 300;
+	font-style: italic;
+}

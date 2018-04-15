@@ -10,6 +10,7 @@ import mongoose from 'mongoose';
 
 //Routes
 import index from 'routes/index';
+import timeBank from 'routes/time-bank';
 import timeReport from 'routes/time-report';
 
 // Connect to mongodb
@@ -49,6 +50,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', index);
+app.use('/', timeBank);
 app.use('/', timeReport);
 
 // Create a http server and start it on port 3000.

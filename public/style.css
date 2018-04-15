@@ -2364,25 +2364,63 @@
   -webkit-animation-name: slideOutUp;
   animation-name: slideOutUp; }
 
-html, body {
+@font-face {
+  font-family: 'Butler';
+  src: url("../../fonts/butler_black_stencil-webfont.woff2") format("woff2"), url("../../fonts/butler_black_stencil-webfont.woff") format("woff");
+  font-weight: 300; }
+
+@font-face {
+  font-family: 'Butler Bold';
+  src: url("../../fonts/butler_bold_stencil-webfont.woff2") format("woff2"), url("../../fonts/butler_bold_stencil-webfont.woff") format("woff");
+  font-weight: 300; }
+
+@font-face {
+  font-family: 'Butler Light';
+  src: url("../../fonts/butler_light_stencil-webfont.woff2") format("woff2"), url("../../fonts/butler_light_stencil-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: italic; }
+
+@font-face {
+  font-family: 'Butler Reg';
+  src: url("../../fonts/butler_regular_stencil-webfont.woff2") format("woff2"), url("../../fonts/butler_regular_stencil-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: italic; }
+
+body {
   width: 100%;
   height: 100%;
-  margin: 0; }
+  margin: 0;
+  font-family: Sans-Serif, Arial;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased; }
 
 h1, h2, h3, h4, h5 {
   margin-top: 0; }
 
 .navigation-wrap {
-  width: 250px;
+  width: 350px;
   padding: 15px;
   height: 100%;
   position: fixed;
   left: 0;
-  background-color: #eeeeee; }
+  background-color: #eeeeee;
+  background-size: cover;
+  background-position: 50% 50%;
+  z-index: 1; }
+  .navigation-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #2c2c6b;
+    opacity: .9;
+    z-index: -1; }
 
 .main-wrap {
   width: 100%;
-  padding: 15px 15px 15px 265px;
+  padding: 15px 15px 15px 365px;
   position: relative; }
 
 .divider {
@@ -2392,30 +2430,31 @@ h1, h2, h3, h4, h5 {
   background-color: #fff;
   margin-bottom: 20px; }
 
-.time-report .time-form h4 {
+.time-form h4 {
   margin-top: 20px; }
 
-.time-report .time-form select {
+.time-form select {
   margin: 0 10px; }
 
-.time-report .time-form button {
+.time-form button {
   display: block; }
 
-.time-report .time-form .comment-wrap textarea {
+.time-form .comment-wrap textarea {
   height: 30px;
   width: 70%;
   resize: none; }
 
-.time-report .time-item .date p {
+.time-item .date p {
   display: inline-block; }
 
-.time-report .time-item .remove-time {
+.time-item .remove-time {
   display: inline-block; }
-  .time-report .time-item .remove-time:hover {
+  .time-item .remove-time:hover {
     cursor: pointer; }
 
-.time-report .day {
+.day {
   display: flex;
-  flex-wrap: wrap; }
-  .time-report .day:empty {
+  flex-wrap: wrap;
+  width: 100%; }
+  .day:empty {
     display: none; }
