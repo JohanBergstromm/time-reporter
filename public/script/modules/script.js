@@ -3,7 +3,8 @@ $(document).ready(function() {
     reportTime();
     saveMonthlyTime();
     removeTime();
-    showMonthlyTime();
+    //showMonthlyTime();
+    getMonthlyTime();
 });
 
 function reportTime() {
@@ -33,7 +34,8 @@ function reportTime() {
             },
             add: {
                 comment: comment
-            }
+            },
+            month: month
         }
 
         $.post('/times', data).then(function(response) {
@@ -41,15 +43,22 @@ function reportTime() {
 
                 if (response.date.day == $(el).data('day')) {
                     $(el).append(`
-					<div class="time-item col-3" data-id="${response._id}">
-						<div class="date">
-							<p class="m-0 d-none">${response.date.day}/${response.date.month}</p>
-						</div>
-						<div class="time">
-							<p class="m-0">Från: ${response.from.hour}:${response.from.minute} Till ${response.to.hour}:${response.to.minute}</p>
-						</div>
-						<a class="remove-time my-2 btn btn-danger">Ta bort</a>
-					</div>`);
+                    <div class="time-item col-3" data-id="${response._id}">
+                        <div class="date">
+                            <p class="m-0 d-none">${response.date.day}/${response.date.month}</p>
+                        </div>
+                        <div class="time">
+                            <p class="m-0">Från: ${response.from.hour}:${response.from.minute} Till ${response.to.hour}:${response.to.minute}</p>
+                        </div>
+                        <a class="remove-time my-2 btn btn-danger">Ta bort</a>
+                    </div>
+                    <div class="d-none>
+                        <input type="hidden" class="fhDone" name="fromHour" value="${response.from.hour}">
+                        <input type="hidden" class="fmDone" name="fromMin" value="${response.from.minute}">
+                        <input type="hidden" class="thDone" name="toHour" value="${response.to.hour}">
+                        <input type="hidden" class="tmDone" name="toMin" value="${response.to.minute}">
+                        <input type="hidden" class="commentDone" name="comment" value="${response.add.comment}">
+                    </div>"`);
                     if ($(el).hasClass('d-none')) {
                         var date = $(el).find('.date p').eq(0).text();
 
@@ -63,12 +72,6 @@ function reportTime() {
         }).fail(function(err) {
             console.log(err)
         });
-
-        // $[form.method](form.action, $(form).serialize()).then((response) => {
-        //     console.log(response);
-        // }).fail((err) => {
-        //     console.error(err);
-        // });
     });
 }
 
@@ -77,7 +80,9 @@ function saveMonthlyTime() {
         e.preventDefault();
 
         const months = ['Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December'];
-        let month = months[$('.monthDone').val() - 1];
+        let currentTime = new Date();
+        let year = currentTime.getFullYear();
+        let month = months[$('.monthDone').val() - 1] + ' - ' + year;
         let monthTimes = [];
         let dataStorage = { month, monthTimes }
 
@@ -105,40 +110,93 @@ function saveMonthlyTime() {
                 },
                 add: {
                     comment: commentt
+                },
+                month: month
+            }
+
+            $.post('/time-bank', data).then(function(response) {
+                console.log(response);
+            }).fail(function(err) {
+                console.log(err)
+            });
+        });
+    });
+}
+
+function getMonthlyTime() {
+    $('.get-monthly-time').submit(function(e) {
+        e.preventDefault();
+
+        var template = '';
+        var month = $('.month-select').val();
+
+        var data = {
+            month: month
+        }
+
+        $.post('/get-monthly-time', data).then(function(response) {
+            console.log(response)
+            for (let data of response) {
+                //var data = response[item];
+                if (data.add) {
+                    template += `<div class="time-item col-3" data-id="${data._id}" data-day="${data.date.day}">
+                        <div class="date">
+                            <p class="d-none">${data.date.day}/${data.date.month}</p>
+                        </div>
+                        <div class="time">
+                            <p class="m-0">Från: ${data.from.hour}:${data.from.minute} Till: ${data.to.hour}:${data.to.minute}</p>
+                        </div>
+                        <div class="comment">
+                            <p class="m-0">Kommentar: ${data.add.comment}</p>
+                        </div>
+                        <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
+                    </div>`;
+                } else {
+                    template += `<div class="time-item col-3" data-id="${data._id}" data-day="${data.date.day}">
+                        <div class="date">
+                            <p class="d-none">${data.date.day}/${data.date.month}</p>
+                        </div>
+                        <div class="time">
+                            <p class="m-0">Från: ${data.from.hour}:${data.from.minute} Till: ${data.to.hour}:${data.to.minute}</p>
+                        </div>
+                        <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
+                    </div>`;
                 }
             }
-            monthTimes.push(data);
-        });
-
-        $.post('/time-bank', dataStorage).then(function(response) {
-            console.log(response);
-        }).fail(function(err) {
-            console.log(err)
+            $('.data-holder').html(template);
+            sortItems();
+            console.log(template)
+        }).fail((err) => {
+            console.log(err);
         });
     });
 }
 
 function removeTime() {
-    $('.time-report .days, .time-bank .days').on('click', '.remove-time', function() {
+    $('.time-report .days, .time-bank').on('click', '.remove-time', function() {
         var timeItem = $(this).closest('.time-item');
         var id = timeItem.data('id');
         var buttonLength = $(this).closest('.day').find('.time-item').length;
 
         if ($('.time-report').length) {
-        	$.post('/times/' + id).then((response) => {
-            	console.log(response);
-            	timeItem.remove();
-	        }).fail((err) => {
-	            console.log(err);
-	        });
+            $.post('/times/' + id).then((response) => {
+                console.log(response);
+                timeItem.remove();
+            }).fail((err) => {
+                console.log(err);
+            });
         } else {
-        	// Not ready yet
-        	$.post('/time-bank/' + id).then((response) => {
-            	console.log(response);
-            	timeItem.remove();
-	        }).fail((err) => {
-	            console.log(err);
-	        });
+            $('.time-bank .time-item').each(function(i, el) {
+                var id = $(el).data('id');
+
+                $.post('/time-bank/' + id).then((response) => {
+                    console.log(response);
+                    // $('.time-bank .time-item').remove();
+                }).fail((err) => {
+                    console.log(err);
+                });
+
+            });
         }
 
         if (buttonLength === 1) {
@@ -147,49 +205,49 @@ function removeTime() {
     });
 }
 
-function showMonthlyTime() {
-    $('.time-bank').on('click', 'h3', function() {
-        let template = '';
-        let selectedMonth = $(this).closest('div');
-        let id = selectedMonth.data('id');
+// function showMonthlyTime() {
+//     $('.time-bank').on('click', 'h3', function() {
+//         let template = '';
+//         let selectedMonth = $(this).closest('div');
+//         let id = selectedMonth.data('id');
 
-        resetHTML();
+//         resetHTML();
 
-        $.post('/time-bank/' + id).then((response) => {
-            for (let data of response.monthTimes) {
+//         $.post('/time-bank/' + id).then((response) => {
+//             for (let data of response.monthTimes) {
 
-                if (data.add) {
-                    template += `<div class="time-item col-3" data-id="${response._id}" data-day="${data.date.day}">
-				        <div class="date">
-				            <p class="d-none">${data.date.day}/${data.date.month}</p>
-				        </div>
-				        <div class="time">
-				            <p class="m-0">Från: ${data.from.hour}:${data.from.minute} Till: ${data.to.hour}:${data.to.minute}</p>
-				        </div>
-				        <div class="comment">
-				            <p class="m-0">Kommentar: ${data.add.comment}</p>
-				        </div>
-				        <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
-				    </div>`;
-                } else {
-                    template += `<div class="time-item col-3" data-id="${response._id}" data-day="${data.date.day}">
-				        <div class="date">
-				            <p class="d-none">${data.date.day}/${data.date.month}</p>
-				        </div>
-				        <div class="time">
-				            <p class="m-0">Från: ${data.from.hour}:${data.from.minute} Till: ${data.to.hour}:${data.to.minute}</p>
-				        </div>
-				        <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
-				    </div>`;
-                }
-            }
-            $('.data-holder').html(template)
-            sortItems();
-        }).fail((err) => {
-            console.log(err);
-        });
-    });
-}
+//                 if (data.add) {
+//                     template += `<div class="time-item col-3" data-id="${response._id}" data-day="${data.date.day}">
+//                      <div class="date">
+//                          <p class="d-none">${data.date.day}/${data.date.month}</p>
+//                      </div>
+//                      <div class="time">
+//                          <p class="m-0">Från: ${data.from.hour}:${data.from.minute} Till: ${data.to.hour}:${data.to.minute}</p>
+//                      </div>
+//                      <div class="comment">
+//                          <p class="m-0">Kommentar: ${data.add.comment}</p>
+//                      </div>
+//                      <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
+//                  </div>`;
+//                 } else {
+//                     template += `<div class="time-item col-3" data-id="${response._id}" data-day="${data.date.day}">
+//                      <div class="date">
+//                          <p class="d-none">${data.date.day}/${data.date.month}</p>
+//                      </div>
+//                      <div class="time">
+//                          <p class="m-0">Från: ${data.from.hour}:${data.from.minute} Till: ${data.to.hour}:${data.to.minute}</p>
+//                      </div>
+//                      <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
+//                  </div>`;
+//                 }
+//             }
+//             $('.data-holder').html(template)
+//             sortItems();
+//         }).fail((err) => {
+//             console.log(err);
+//         });
+//     });
+// }
 
 function resetHTML() {
     $('.day').addClass('d-none');

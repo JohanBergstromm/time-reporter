@@ -1,5 +1,12 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+templates['monthlyTime'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<p>"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.date : depth0)) != null ? stack1.month : stack1), depth0))
+    + "</p>";
+},"useData":true});
 templates['storedTime'] = template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 

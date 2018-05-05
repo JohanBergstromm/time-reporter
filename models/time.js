@@ -15,7 +15,8 @@ const schema = new mongoose.Schema({
     },
     add: {
         comment: String
-    }
+    },
+    month: String
 });
 
 export default mongoose.model('Time', schema);

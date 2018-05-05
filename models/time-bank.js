@@ -1,8 +1,22 @@
 import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
-	month: String,
-	monthTimes: Array
+	from: {
+        hour: String,
+        minute: String
+    },
+    to: {
+        hour: String,
+        minute: String
+    },
+    date: {
+        month: String,
+        day: String
+    },
+    add: {
+        comment: String
+    },
+    month: String
 });
 
 export default mongoose.model('storage', schema);

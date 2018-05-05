@@ -10,6 +10,7 @@ import mongoose from 'mongoose';
 
 //Routes
 import index from 'routes/index';
+import getMonthlyTime from 'routes/get-monthly-time';
 import timeBank from 'routes/time-bank';
 import timeReport from 'routes/time-report';
 
@@ -39,7 +40,6 @@ app.set('view engine', 'handlebars');
 
 // Setup static paths
 app.use('/handlebars', express.static(path.join(__dirname, 'node_modules/handlebars')));
-// app.use('/templates', express.static(path.join(__dirname, 'public/templates')));
 
 // Set the public-folder to static.
 app.use(express.static('public'));
@@ -50,6 +50,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', index);
+app.use('/', getMonthlyTime);
 app.use('/', timeBank);
 app.use('/', timeReport);
 

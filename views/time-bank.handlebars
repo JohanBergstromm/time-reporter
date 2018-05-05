@@ -5,13 +5,15 @@
     	</div>
     </div>
     <div class="time-bank">
-    	<div class="row">
-	    	{{#each storages}}
-	        <div class="col-3" data-id="{{this._id}}">
-	        	<h3>{{this.month}}</h3>
-	        </div>
-	        {{/each}}
-	    </div>
+        <form class="get-monthly-time">
+            <select class="month-select">
+              {{> months}}
+            </select>
+            <input type="submit" name="">
+        </form>
+        <div class="remove-time-wrap">
+            <input type="button" name="" value="Ta bort månad" class="remove-time">
+        </div>
     	<div class="days">
     		<div class="row">
     			{{> days}}
