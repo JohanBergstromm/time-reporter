@@ -39,10 +39,32 @@ function reportTime() {
         }
 
         $.post('/times', data).then(function(response) {
-            $('.days .day').each(function(i, el) {
+            var template = '';
 
-                if (response.date.day == $(el).data('day')) {
-                    $(el).append(`
+            $('.days .day').each(function(i, el) {
+                if (response.add.comment) {
+                    template +=`
+                    <div class="time-item col-3" data-id="${response._id}">
+                        <div class="date">
+                            <p class="m-0 d-none">${response.date.day}/${response.date.month}</p>
+                        </div>
+                        <div class="time">
+                            <p class="m-0">Från: ${response.from.hour}:${response.from.minute} Till ${response.to.hour}:${response.to.minute}</p>
+                        </div>
+                        <div class="comment">
+                            <p class="m-0">Kommentar: ${response.add.comment}</p>
+                        </div>
+                        <a class="remove-time my-2 btn btn-danger">Ta bort</a>
+                    </div>
+                    <div class="d-none">
+                        <input type="hidden" class="fhDone" name="fromHour" value="${response.from.hour}">
+                        <input type="hidden" class="fmDone" name="fromMin" value="${response.from.minute}">
+                        <input type="hidden" class="thDone" name="toHour" value="${response.to.hour}">
+                        <input type="hidden" class="tmDone" name="toMin" value="${response.to.minute}">
+                        <input type="hidden" class="commentDone" name="comment" value="${response.add.comment}">
+                    </div>`
+                } else {
+                    template +=`
                     <div class="time-item col-3" data-id="${response._id}">
                         <div class="date">
                             <p class="m-0 d-none">${response.date.day}/${response.date.month}</p>
@@ -52,13 +74,16 @@ function reportTime() {
                         </div>
                         <a class="remove-time my-2 btn btn-danger">Ta bort</a>
                     </div>
-                    <div class="d-none>
+                    <div class="d-none">
                         <input type="hidden" class="fhDone" name="fromHour" value="${response.from.hour}">
                         <input type="hidden" class="fmDone" name="fromMin" value="${response.from.minute}">
                         <input type="hidden" class="thDone" name="toHour" value="${response.to.hour}">
                         <input type="hidden" class="tmDone" name="toMin" value="${response.to.minute}">
-                        <input type="hidden" class="commentDone" name="comment" value="${response.add.comment}">
-                    </div>"`);
+                    </div>`
+                }
+
+                if (response.date.day == $(el).data('day')) {
+                    $(el).append(template);
                     if ($(el).hasClass('d-none')) {
                         var date = $(el).find('.date p').eq(0).text();
 
@@ -191,7 +216,7 @@ function removeTime() {
 
                 $.post('/time-bank/' + id).then((response) => {
                     console.log(response);
-                    // $('.time-bank .time-item').remove();
+                    $('.time-bank .days').remove();
                 }).fail((err) => {
                     console.log(err);
                 });
