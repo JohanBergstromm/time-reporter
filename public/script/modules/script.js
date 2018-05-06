@@ -1,15 +1,23 @@
 $(document).ready(function() {
-    sortItems();
+    getMonthlyTime();
+    removeTime();
     reportTime();
     saveMonthlyTime();
-    removeTime();
-    //showMonthlyTime();
-    getMonthlyTime();
+    // showMonthlyTime();
+    sortItems();
 });
 
 function reportTime() {
     $('.time-form').submit((e) => {
         e.preventDefault();
+
+        var selectedMonth = $('select#month').val();
+        var savedMonths = $('.time-item').find('.monthDone').val();
+
+        if (selectedMonth !== savedMonths) {
+            alert('Ny månad är inte tillgänglig')
+            return;
+        }
 
         const fromHour = $('#fh').val();
         const fromMin = $('#fm').val();
