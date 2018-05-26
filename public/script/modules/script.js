@@ -14,11 +14,6 @@ function reportTime() {
         var selectedMonth = $('select#month').val();
         var savedMonths = $('.time-item').find('.monthDone').val();
 
-        if (selectedMonth !== savedMonths) {
-            alert('Ny månad är inte tillgänglig')
-            return;
-        }
-
         const fromHour = $('#fh').val();
         const fromMin = $('#fm').val();
         const toHour = $('#th').val();
@@ -26,6 +21,12 @@ function reportTime() {
         const month = $('#month').val();
         const day = $('#day').val();
         const comment = $('#comment').val();
+
+        if ($('.time-item').length > 0 && selectedMonth !== savedMonths) {
+            alert('Ny månad är inte tillgänglig');
+            console.log($('.time-item').length, savedMonths)
+            return;
+        }
 
         data = {
             from: {
@@ -52,7 +53,7 @@ function reportTime() {
             $('.days .day').each(function(i, el) {
                 if (response.add.comment) {
                     template +=`
-                    <div class="time-item col-3" data-id="${response._id}">
+                    <div class="time-item" data-id="${response._id}">
                         <div class="date">
                             <p class="m-0 d-none">${response.date.day}/${response.date.month}</p>
                         </div>
@@ -63,17 +64,16 @@ function reportTime() {
                             <p class="m-0">Kommentar: ${response.add.comment}</p>
                         </div>
                         <a class="remove-time my-2 btn btn-danger">Ta bort</a>
-                    </div>
-                    <div class="d-none">
                         <input type="hidden" class="fhDone" name="fromHour" value="${response.from.hour}">
                         <input type="hidden" class="fmDone" name="fromMin" value="${response.from.minute}">
                         <input type="hidden" class="thDone" name="toHour" value="${response.to.hour}">
                         <input type="hidden" class="tmDone" name="toMin" value="${response.to.minute}">
                         <input type="hidden" class="commentDone" name="comment" value="${response.add.comment}">
+                        <input type="hidden" class="monthDone" name="month" value="${response.month}">
                     </div>`
                 } else {
                     template +=`
-                    <div class="time-item col-3" data-id="${response._id}">
+                    <div class="time-item" data-id="${response._id}">
                         <div class="date">
                             <p class="m-0 d-none">${response.date.day}/${response.date.month}</p>
                         </div>
@@ -81,12 +81,11 @@ function reportTime() {
                             <p class="m-0">Från: ${response.from.hour}:${response.from.minute} Till ${response.to.hour}:${response.to.minute}</p>
                         </div>
                         <a class="remove-time my-2 btn btn-danger">Ta bort</a>
-                    </div>
-                    <div class="d-none">
                         <input type="hidden" class="fhDone" name="fromHour" value="${response.from.hour}">
                         <input type="hidden" class="fmDone" name="fromMin" value="${response.from.minute}">
                         <input type="hidden" class="thDone" name="toHour" value="${response.to.hour}">
                         <input type="hidden" class="tmDone" name="toMin" value="${response.to.minute}">
+                        <input type="hidden" class="monthDone" name="month" value="${response.month}">
                     </div>`
                 }
 
@@ -172,7 +171,7 @@ function getMonthlyTime() {
             for (let data of response) {
                 //var data = response[item];
                 if (data.add) {
-                    template += `<div class="time-item col-3" data-id="${data._id}" data-day="${data.date.day}">
+                    template += `<div class="time-item" data-id="${data._id}" data-day="${data.date.day}">
                         <div class="date">
                             <p class="d-none">${data.date.day}/${data.date.month}</p>
                         </div>
@@ -185,7 +184,7 @@ function getMonthlyTime() {
                         <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
                     </div>`;
                 } else {
-                    template += `<div class="time-item col-3" data-id="${data._id}" data-day="${data.date.day}">
+                    template += `<div class="time-item" data-id="${data._id}" data-day="${data.date.day}">
                         <div class="date">
                             <p class="d-none">${data.date.day}/${data.date.month}</p>
                         </div>
@@ -250,7 +249,7 @@ function removeTime() {
 //             for (let data of response.monthTimes) {
 
 //                 if (data.add) {
-//                     template += `<div class="time-item col-3" data-id="${response._id}" data-day="${data.date.day}">
+//                     template += `<div class="time-item" data-id="${response._id}" data-day="${data.date.day}">
 //                      <div class="date">
 //                          <p class="d-none">${data.date.day}/${data.date.month}</p>
 //                      </div>
@@ -263,7 +262,7 @@ function removeTime() {
 //                      <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
 //                  </div>`;
 //                 } else {
-//                     template += `<div class="time-item col-3" data-id="${response._id}" data-day="${data.date.day}">
+//                     template += `<div class="time-item" data-id="${response._id}" data-day="${data.date.day}">
 //                      <div class="date">
 //                          <p class="d-none">${data.date.day}/${data.date.month}</p>
 //                      </div>

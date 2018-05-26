@@ -6,40 +6,70 @@
     </div>
     <form class="time-form" method="post">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
                 <div class="date-wrap">
                     <h4>Datum</h4>
-                    <span>Månad</span>
-                    <select id="month" name="month">
-                        {{> form-month}}
-                    </select>
-                    <span>Dag</span>
-                    <select id="day" name="day">
-                        {{> form-day}}
-                    </select>
+                    <div class="d-flex flex-wrap">
+                        <div class="mr-4">
+                            <span>Månad</span>
+                            <div class="select-wrap">
+                                <select id="month" name="month">
+                                    {{> form-month}}
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <span>Dag</span>
+                            <div class="select-wrap">
+                                <select id="day" name="day">
+                                    {{> form-day}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="d-flex">
-                    <div class="from-wrap mr-3">
+                <div class="d-flex flex-wrap">
+                    <div class="from-wrap">
                         <h4>Från</h4>
-                        <span>Timme</span>
-                        <select id="fh" name="fromHour">
-                            {{> form-hours}}
-                        </select>
-                        <span>Minut</span>
-                        <select id="fm" name="fromMin">
-                            {{> form-minutes}}
-                        </select>
+                        <div class="d-flex flex-wrap mr-4">
+                            <div class="mr-4">
+                                <span>Timme</span>
+                                <div class="select-wrap">
+                                    <select id="fh" name="fromHour">
+                                        {{> form-hours}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <span>Minut</span>
+                                <div class="select-wrap">
+                                    <select id="fm" name="fromMin">
+                                        {{> form-minutes}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="to-wrap">
                         <h4>Till</h4>
-                        <span>Timme</span>
-                        <select id="th" name="toHour">
-                            {{> form-hours}}
-                        </select>
-                        <span>Minut</span>
-                        <select id="tm" name="toMin">
-                            {{> form-minutes}}
-                        </select>
+                        <div class="d-flex flex-wrap">
+                            <div class="mr-4">
+                                <span>Timme</span>
+                                <div class="select-wrap">
+                                    <select id="th" name="toHour">
+                                        {{> form-hours}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <span>Minut</span>
+                                <div class="select-wrap">
+                                    <select id="tm" name="toMin">
+                                        {{> form-minutes}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="comment-wrap">
@@ -64,7 +94,7 @@
     <div class="time-wrap">
         <div class="row">
             {{#each times}}
-            <div class="time-item col-3" data-id="{{this._id}}" data-day="{{this.date.day}}">
+            <div class="time-item" data-id="{{this._id}}" data-day="{{this.date.day}}">
                 <div class="date">
                     <p class="d-none">{{this.date.day}}/{{this.date.month}}</p>
                     <input type="hidden" class="dayDone" name="day" value="{{this.date.day}}">

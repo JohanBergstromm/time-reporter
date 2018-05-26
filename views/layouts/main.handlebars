@@ -5,19 +5,22 @@
     <title>Time Reporter</title>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width" />
     <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
     <div class="navigation-wrap">
-        <nav>
-            <ul>
-                <li><a href="/">Hem</a></li>
-                <li><a href="/time-bank">Tidsbank</a></li>
-                <li><a href="/time-report">Tidsrapportera</a></li>
-            </ul>
-        </nav>
+        <div class="navigation text-center">
+            <div class="profile-img my-4"></div>
+            <nav>
+                <ul class="unstyled-list">
+                    <li><a href="/" class="py-2 d-block">Hem</a></li>
+                    <li><a href="/time-bank" class="py-2 d-block">Tidsbank</a></li>
+                    <li><a href="/time-report" class="py-2 d-block">Tidsrapportera</a></li>
+                </ul>
+            </nav>
+        </div>
     </div>
     {{{body}}}
     <script type="text/javascript" src="/script/vendor/jquery-3.1.1.min.js"></script>
