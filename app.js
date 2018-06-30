@@ -10,7 +10,6 @@ import mongoose from 'mongoose';
 
 //Routes
 import index from 'routes/index';
-import getMonthlyTime from 'routes/get-monthly-time';
 import timeBank from 'routes/time-bank';
 import timeReport from 'routes/time-report';
 
@@ -50,7 +49,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', index);
-app.use('/', getMonthlyTime);
 app.use('/', timeBank);
 app.use('/', timeReport);
 

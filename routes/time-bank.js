@@ -27,6 +27,18 @@ router.post('/time-bank', function(req, res) {
     // res.json(time);
 });
 
+
+router.post('/get-monthly-time', async function(req, res) {
+    var monthTimes = await timeBank.find({ month: req.body.month });
+
+    if (typeof monthTimes !== 'undefined' && monthTimes.length > 0) {
+        res.json(monthTimes);
+    } else {
+        console.log('No time registered');
+        res.send('No time registered')
+    }
+});
+
 // router.post('/time-bank/:id', async function(req, res) {
 //     const storedTime = await timeBank.findById(req.params.id);
 
