@@ -1,1 +1,16 @@
-<p>{{this.date.month}}</p>
+{{#each response}}
+<div class="time-item" data-id="{{this._id}}" data-day="{{this.date.day}}">
+    <div class="date">
+        <p class="d-none">{{this.date.day}}/{{this.date.month}}</p>
+    </div>
+    <div class="time">
+        <p class="m-0">Från: {{this.from.hour}}:{{this.from.minute}} Till: {{this.to.hour}}:{{this.to.minute}}</p>
+    </div>
+    {{#if this.add.comment}}
+    <div class="comment">
+        <p class="m-0">Kommentar: {{this.add.comment}}</p>
+    </div>
+    {{/if}}
+    <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
+</div>
+{{/each}}

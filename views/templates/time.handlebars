@@ -1,8 +1,21 @@
-<div class="time" data-id="{{response._id}}">
-    <p>{{response.date.day}}/{{response.date.month}}</p>
-    <p>Från: {{response.from.hour}}:{{response.from.minute}} Till: {{response.to.hour}}:{{response.to.minute}}</p>
+<div class="time-item" data-id="{{response._id}}" data-day="{{response.date.day}}">
+    <div class="date">
+        <p class="d-none">{{response.date.day}}/{{response.date.month}}</p>
+        <input type="hidden" class="dayDone" name="day" value="{{response.date.day}}">
+        <input type="hidden" class="monthDone" name="month" value="{{response.date.month}}">
+    </div>
+    <div class="time">
+        <p class="m-0">Från: {{response.from.hour}}:{{response.from.minute}} Till: {{response.to.hour}}:{{response.to.minute}}</p>
+        <input type="hidden" class="fhDone" name="fromHour" value="{{response.from.hour}}">
+        <input type="hidden" class="fmDone" name="fromMin" value="{{response.from.minute}}">
+        <input type="hidden" class="thDone" name="toHour" value="{{response.to.hour}}">
+        <input type="hidden" class="tmDone" name="toMin" value="{{response.to.minute}}">
+    </div>
     {{#if response.add.comment}}
-    <p>Kommentar: {{response.add.comment}}</p>
+    <div class="comment">
+        <p class="m-0">Kommentar: {{response.add.comment}}</p>
+        <input type="hidden" class="commentDone" name="comment" value="{{response.add.comment}}">
+    </div>
     {{/if}}
-    <span class="remove-time">X</span>
+    <a class="remove-time btn btn-danger my-2">Ta bort</a>
 </div>
