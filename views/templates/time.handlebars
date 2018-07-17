@@ -1,11 +1,11 @@
-<div class="time-item" data-id="{{response._id}}" data-day="{{response.date.day}}">
-    <div class="date">
+<div class="time-item col-3" data-id="{{response._id}}" data-day="{{response.date.day}}">
+    <div class="date mb-2">
         <p class="d-none">{{response.date.day}}/{{response.date.month}}</p>
         <input type="hidden" class="dayDone" name="day" value="{{response.date.day}}">
         <input type="hidden" class="monthDone" name="month" value="{{response.date.month}}">
     </div>
     <div class="time">
-        <p class="m-0">Från: {{response.from.hour}}:{{response.from.minute}} Till: {{response.to.hour}}:{{response.to.minute}}</p>
+        <p class="m-0 d-flex justify-content-between"><span>Från: {{response.from.hour}}:{{response.from.minute}}</span>-<span>Till: {{response.to.hour}}:{{response.to.minute}}</span></p>
         <input type="hidden" class="fhDone" name="fromHour" value="{{response.from.hour}}">
         <input type="hidden" class="fmDone" name="fromMin" value="{{response.from.minute}}">
         <input type="hidden" class="thDone" name="toHour" value="{{response.to.hour}}">
@@ -17,5 +17,5 @@
         <input type="hidden" class="commentDone" name="comment" value="{{response.add.comment}}">
     </div>
     {{/if}}
-    <a class="remove-time btn btn-danger my-2">Ta bort</a>
+    <a class="remove-time btn btn-danger my-2 btn-block">Ta bort</a>
 </div>

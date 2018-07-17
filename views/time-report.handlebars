@@ -4,7 +4,7 @@
             <h2>Tidsrapportera</h2>
         </div>
     </div>
-    <form class="time-form" method="post">
+    <form class="time-form mb-4" method="post">
         <div class="row">
             <div class="col-12">
                 <div class="date-wrap">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex flex-wrap">
+                <div class="d-flex flex-wrap justify-content-between">
                     <div class="from-wrap">
                         <h4>Från</h4>
                         <div class="d-flex flex-wrap mr-4">
@@ -87,6 +87,9 @@
                 {{> days}}
             </div>
             <div class="col-12">
+                <p>Total tid denna månad: <span id="total-time"></span>h</p>
+            </div>
+            <div class="col-12">
                 <button type="submit" class="btn btn-primary">Klar</button>
             </div>
         </form>
@@ -94,14 +97,15 @@
     <div class="time-wrap">
         <div class="row">
             {{#each times}}
-            <div class="time-item" data-id="{{this._id}}" data-day="{{this.date.day}}">
-                <div class="date">
+            <div class="time-item col-3" data-id="{{this._id}}" data-day="{{this.date.day}}">
+                <div class="date mb-2">
                     <p class="d-none">{{this.date.day}}/{{this.date.month}}</p>
                     <input type="hidden" class="dayDone" name="day" value="{{this.date.day}}">
                     <input type="hidden" class="monthDone" name="month" value="{{this.date.month}}">
                 </div>
                 <div class="time">
-                    <p class="m-0">Från: {{this.from.hour}}:{{this.from.minute}} Till: {{this.to.hour}}:{{this.to.minute}}</p>
+                    <p class="m-0 d-flex justify-content-between">
+                        <span>Från: {{this.from.hour}}:{{this.from.minute}}</span>-<span>Till: {{this.to.hour}}:{{this.to.minute}}</span></p>
                     <input type="hidden" class="fhDone" name="fromHour" value="{{this.from.hour}}">
                     <input type="hidden" class="fmDone" name="fromMin" value="{{this.from.minute}}">
                     <input type="hidden" class="thDone" name="toHour" value="{{this.to.hour}}">
@@ -113,7 +117,7 @@
                     <input type="hidden" class="commentDone" name="comment" value="{{this.add.comment}}">
                 </div>
                 {{/if}}
-                <a class="remove-time btn btn-danger my-2">Ta bort</a>
+                <a class="remove-time btn btn-danger my-2 btn-block">Ta bort</a>
             </div>
             {{/each}}
         </div>

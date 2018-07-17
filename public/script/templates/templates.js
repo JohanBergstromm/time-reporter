@@ -81,11 +81,11 @@ templates['time'] = template({"1":function(container,depth0,helpers,partials,dat
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "<div class=\"time-item\" data-id=\""
+  return "<div class=\"time-item col-3\" data-id=\""
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1._id : stack1), depth0))
     + "\" data-day=\""
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.date : stack1)) != null ? stack1.day : stack1), depth0))
-    + "\">\n    <div class=\"date\">\n        <p class=\"d-none\">"
+    + "\">\n    <div class=\"date mb-2\">\n        <p class=\"d-none\">"
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.date : stack1)) != null ? stack1.day : stack1), depth0))
     + "/"
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.date : stack1)) != null ? stack1.month : stack1), depth0))
@@ -93,15 +93,15 @@ templates['time'] = template({"1":function(container,depth0,helpers,partials,dat
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.date : stack1)) != null ? stack1.day : stack1), depth0))
     + "\">\n        <input type=\"hidden\" class=\"monthDone\" name=\"month\" value=\""
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.date : stack1)) != null ? stack1.month : stack1), depth0))
-    + "\">\n    </div>\n    <div class=\"time\">\n        <p class=\"m-0\">Från: "
+    + "\">\n    </div>\n    <div class=\"time\">\n        <p class=\"m-0 d-flex justify-content-between\"><span>Från: "
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.from : stack1)) != null ? stack1.hour : stack1), depth0))
     + ":"
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.from : stack1)) != null ? stack1.minute : stack1), depth0))
-    + " Till: "
+    + "</span>-<span>Till: "
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.to : stack1)) != null ? stack1.hour : stack1), depth0))
     + ":"
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.to : stack1)) != null ? stack1.minute : stack1), depth0))
-    + "</p>\n        <input type=\"hidden\" class=\"fhDone\" name=\"fromHour\" value=\""
+    + "</span></p>\n        <input type=\"hidden\" class=\"fhDone\" name=\"fromHour\" value=\""
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.from : stack1)) != null ? stack1.hour : stack1), depth0))
     + "\">\n        <input type=\"hidden\" class=\"fmDone\" name=\"fromMin\" value=\""
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.from : stack1)) != null ? stack1.minute : stack1), depth0))
@@ -111,6 +111,6 @@ templates['time'] = template({"1":function(container,depth0,helpers,partials,dat
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.to : stack1)) != null ? stack1.minute : stack1), depth0))
     + "\">\n    </div>\n"
     + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = ((stack1 = (depth0 != null ? depth0.response : depth0)) != null ? stack1.add : stack1)) != null ? stack1.comment : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    <a class=\"remove-time btn btn-danger my-2\">Ta bort</a>\n</div>";
+    + "    <a class=\"remove-time btn btn-danger my-2 btn-block\">Ta bort</a>\n</div>";
 },"useData":true});
 })();

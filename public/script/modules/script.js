@@ -5,6 +5,7 @@ $(document).ready(function() {
     saveMonthlyTime();
     // showMonthlyTime();
     sortItems();
+    calcTime();
 });
 
 function reportTime() {
@@ -69,6 +70,7 @@ function reportTime() {
                         }
                     }
                 });
+                calcTime();
                 console.log(response);
             })
             .fail(function(err) {
@@ -261,6 +263,28 @@ function removeTime() {
 //         });
 //     });
 // }
+
+function calcTime() {
+    let timeThisMonth = [];
+
+    $('.time-item').each(function(i, el) {
+        let $el = $(el);
+
+        let fromHour = parseInt($el.find('.time .fhDone').val() * 60);
+        let fromMin = parseInt($el.find('.time .fmDone').val());
+        let fromTime = fromHour + fromMin;
+        let toHour = parseInt($el.find('.time .thDone').val() * 60);
+        let toMin = parseInt($el.find('.time .tmDone').val());
+        let toTime = toHour + toMin;
+        let timeSpent = toTime - fromTime;
+
+        timeThisMonth.push(timeSpent);
+    });
+
+    let totalTimeThisMonth = (timeThisMonth.reduce((a, b) => a + b) / 60).toFixed(2);
+
+    $('.time-bank #total-time').html(totalTimeThisMonth);
+}
 
 function resetHTML() {
     $('.day').addClass('d-none');

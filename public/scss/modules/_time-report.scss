@@ -1,4 +1,10 @@
+.time-bank {
+    max-width: 850px;
+}
+
 .time-form {
+    max-width: 350px;
+
     h4 {
         margin-top: 20px;
     }
@@ -45,8 +51,6 @@
 }
 
 .time-item {
-    width: 100%;
-    padding: 0 15px;
     .date {
         p {
             display: inline-block;
@@ -66,5 +70,15 @@
     width: 100%;
     &:empty {
         display: none;
+    }
+}
+
+a.btn-danger.remove-time {
+    background: none;
+    color: #d9534f;
+    border-radius: 0;
+    &:hover {
+        color: #fff;
+        background: #d9534f;
     }
 }

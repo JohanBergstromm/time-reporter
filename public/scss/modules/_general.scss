@@ -5,9 +5,14 @@ body {
     font-family: Sans-Serif, Arial;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
+    color: #434652;
 }
 
-h1, h2, h3, h4, h5, {
+h1,
+h2,
+h3,
+h4,
+h5 {
     margin-top: 0;
 }
 
@@ -29,4 +34,8 @@ h1, h2, h3, h4, h5, {
     padding: 0;
     margin: 0;
     list-style-type: none;
+}
+
+textarea {
+    border-color: #434652;
 }
