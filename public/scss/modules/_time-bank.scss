@@ -1,0 +1,42 @@
+.time-bank {
+    .select-wrap {
+        position: relative;
+        width: 120px;
+
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #434652;
+            transform: translateY(-50%);
+        }
+    }
+
+    select {
+        width: 100%;
+        display: block;
+        -webkit-appearance: none;
+        border-radius: 3px;
+        border: none;
+        background-color: #d0d3de;
+        color: #303742;
+        padding: 0.5rem 1rem;
+        margin: 0;
+        outline: none;
+    }
+
+    button {
+        display: block;
+    }
+
+    .remove-time-wrap .btn {
+        background: #d9534f;
+        color: #fff;
+    }
+}

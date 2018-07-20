@@ -2426,6 +2426,45 @@ h5 {
 textarea {
   border-color: #434652; }
 
+button,
+a.btn {
+  border-radius: 0 !important; }
+
+.time-bank .select-wrap {
+  position: relative;
+  width: 120px; }
+  .time-bank .select-wrap::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #434652;
+    transform: translateY(-50%); }
+
+.time-bank select {
+  width: 100%;
+  display: block;
+  -webkit-appearance: none;
+  border-radius: 3px;
+  border: none;
+  background-color: #d0d3de;
+  color: #303742;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  outline: none; }
+
+.time-bank button {
+  display: block; }
+
+.time-bank .remove-time-wrap .btn {
+  background: #d9534f;
+  color: #fff; }
+
 .time-bank {
   max-width: 850px; }
 
@@ -2475,6 +2514,10 @@ textarea {
   display: inline-block; }
   .time-item .remove-time:hover {
     cursor: pointer; }
+
+.days h5 {
+  border-bottom: 1px solid #d8d8d8;
+  padding-bottom: 0.5rem; }
 
 .day {
   display: flex;

@@ -76,7 +76,7 @@
                     <h4>Kommentar</h4>
                     <textarea id="comment" name="comment"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Lägg till</button>
+                <button type="submit" class="btn btn-primary mt-2">Lägg till</button>
             </div>
         </div>
     </form>
@@ -86,8 +86,8 @@
             <div class="days w-100">
                 {{> days}}
             </div>
-            <div class="col-12">
-                <p>Total tid denna månad: <span id="total-time"></span>h</p>
+            <div class="col-12 total-time-wrap d-none">
+                <p class="font-italic">Total tid denna månad: <span id="total-time"></span> timmar</p>
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Klar</button>

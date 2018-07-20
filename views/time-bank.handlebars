@@ -1,25 +1,30 @@
 <div class="main-wrap">
-    <div class="col-12">
-    	<div class="row">
-    		<h1>Tidsbank</h1>
-    	</div>
+    <div class="row">
+        <div class="col-12">
+    		<h2 class="mb-4">Tidsbank</h2>
+        </div>
     </div>
     <div class="time-bank">
-        <form class="get-monthly-time">
-            <select class="month-select">
-              {{> months}}
-            </select>
-            <input type="submit" name="">
+        <form class="get-monthly-time d-flex mb-4">
+            <div class="select-wrap mr-4">
+                <select class="month-select">
+                  {{> months}}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Visa månad</button>
         </form>
-        <div class="remove-time-wrap">
-            <input type="button" name="" value="Ta bort månad" class="remove-time">
-        </div>
     	<div class="days">
     		<div class="row">
     			{{> days}}
     		</div>
         </div>
         <div class="data-holder">
+        </div>
+        <div class="total-time-wrap d-none">
+            <p class="font-italic">Total tid denna månad: <span id="total-time"></span> timmar</p>
+        </div>
+        <div class="remove-time-wrap d-none">
+            <a href="#" class="btn btn-danger remove-time">Ta bort månad</a>
         </div>
     </div>
 </div>

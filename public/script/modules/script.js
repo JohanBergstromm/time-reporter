@@ -5,7 +5,9 @@ $(document).ready(function() {
     saveMonthlyTime();
     // showMonthlyTime();
     sortItems();
-    calcTime();
+    if ($('.time-report').length) {
+        calcTime();
+    }
 });
 
 function reportTime() {
@@ -169,9 +171,15 @@ function getMonthlyTime() {
         $.post('/get-monthly-time', data)
             .then(function(response) {
                 console.log(response);
+
                 let template = Handlebars.templates['monthlyTime']({ response });
+
                 $('.data-holder').html(template);
                 sortItems();
+                if ($('.time-item').length) {
+                    calcTime();
+                    $('.remove-time-wrap').removeClass('d-none');
+                }
                 console.log(template);
             })
             .fail(err => {
@@ -265,6 +273,14 @@ function removeTime() {
 // }
 
 function calcTime() {
+    if (!$('.time-item').length) {
+        return;
+    }
+
+    if ($('.time-item').length) {
+        $('.total-time-wrap').removeClass('d-none');
+    }
+
     let timeThisMonth = [];
 
     $('.time-item').each(function(i, el) {
@@ -283,7 +299,7 @@ function calcTime() {
 
     let totalTimeThisMonth = (timeThisMonth.reduce((a, b) => a + b) / 60).toFixed(2);
 
-    $('.time-bank #total-time').html(totalTimeThisMonth);
+    $('#total-time').html(totalTimeThisMonth);
 }
 
 function resetHTML() {

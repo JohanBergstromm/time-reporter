@@ -3,15 +3,15 @@
 templates['monthlyTime'] = template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "<div class=\"time-item\" data-id=\""
+  return "<div class=\"time-item col-3\" data-id=\""
     + alias2(alias1((depth0 != null ? depth0._id : depth0), depth0))
     + "\" data-day=\""
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.date : depth0)) != null ? stack1.day : stack1), depth0))
-    + "\">\n    <div class=\"date\">\n        <p class=\"d-none\">"
+    + "\">\n    <div class=\"date mb-2\">\n        <p class=\"d-none\">"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.date : depth0)) != null ? stack1.day : stack1), depth0))
     + "/"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.date : depth0)) != null ? stack1.month : stack1), depth0))
-    + "</p>\n    </div>\n    <div class=\"time\">\n        <p class=\"m-0\">Från: "
+    + "</p>\n    </div>\n    <div class=\"time\">\n        <p class=\"m-0 d-flex justify-content-between\">Från: "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.from : depth0)) != null ? stack1.hour : stack1), depth0))
     + ":"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.from : depth0)) != null ? stack1.minute : stack1), depth0))
@@ -19,9 +19,17 @@ templates['monthlyTime'] = template({"1":function(container,depth0,helpers,parti
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.to : depth0)) != null ? stack1.hour : stack1), depth0))
     + ":"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.to : depth0)) != null ? stack1.minute : stack1), depth0))
-    + "</p>\n    </div>\n"
+    + "</p>\n        <input type=\"hidden\" class=\"fhDone\" name=\"fromHour\" value=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.from : depth0)) != null ? stack1.hour : stack1), depth0))
+    + "\">\n        <input type=\"hidden\" class=\"fmDone\" name=\"fromMin\" value=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.from : depth0)) != null ? stack1.minute : stack1), depth0))
+    + "\">\n        <input type=\"hidden\" class=\"thDone\" name=\"toHour\" value=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.to : depth0)) != null ? stack1.hour : stack1), depth0))
+    + "\">\n        <input type=\"hidden\" class=\"tmDone\" name=\"toMin\" value=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.to : depth0)) != null ? stack1.minute : stack1), depth0))
+    + "\">\n    </div>\n"
     + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.add : depth0)) != null ? stack1.comment : stack1),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    <a class=\"d-none remove-time btn btn-danger my-2\">Ta bort</a>\n</div>\n";
+    + "    <a class=\"remove-time btn btn-danger my-2 btn-block\">Ta bort</a>\n</div>\n";
 },"2":function(container,depth0,helpers,partials,data) {
     var stack1;
 

@@ -1,16 +1,20 @@
 {{#each response}}
-<div class="time-item" data-id="{{this._id}}" data-day="{{this.date.day}}">
-    <div class="date">
+<div class="time-item col-3" data-id="{{this._id}}" data-day="{{this.date.day}}">
+    <div class="date mb-2">
         <p class="d-none">{{this.date.day}}/{{this.date.month}}</p>
     </div>
     <div class="time">
-        <p class="m-0">Från: {{this.from.hour}}:{{this.from.minute}} Till: {{this.to.hour}}:{{this.to.minute}}</p>
+        <p class="m-0 d-flex justify-content-between">Från: {{this.from.hour}}:{{this.from.minute}} Till: {{this.to.hour}}:{{this.to.minute}}</p>
+        <input type="hidden" class="fhDone" name="fromHour" value="{{this.from.hour}}">
+        <input type="hidden" class="fmDone" name="fromMin" value="{{this.from.minute}}">
+        <input type="hidden" class="thDone" name="toHour" value="{{this.to.hour}}">
+        <input type="hidden" class="tmDone" name="toMin" value="{{this.to.minute}}">
     </div>
     {{#if this.add.comment}}
     <div class="comment">
         <p class="m-0">Kommentar: {{this.add.comment}}</p>
     </div>
     {{/if}}
-    <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
+    <a class="remove-time btn btn-danger my-2 btn-block">Ta bort</a>
 </div>
 {{/each}}
