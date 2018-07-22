@@ -2486,7 +2486,8 @@ a.btn {
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
       border-top: 5px solid #434652;
-      transform: translateY(-50%); }
+      transform: translateY(-50%);
+      pointer-events: none; }
   .time-form select {
     width: 100%;
     display: block;

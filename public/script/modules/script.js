@@ -10,6 +10,13 @@ $(document).ready(function() {
     }
 });
 
+let currentTime = new Date();
+let year = currentTime.getFullYear();
+
+function setYear() {
+    $('.year').val(year)
+}
+
 function reportTime() {
     $('.time-form').submit(e => {
         e.preventDefault();
@@ -26,6 +33,7 @@ function reportTime() {
         const month = $('#month').val();
         const day = $('#day').val();
         const comment = $('#comment').val();
+        const noTime = $('#no-time').is(':checked');
 
         if ($('.time-item').length > 0 && selectedMonth !== savedMonths) {
             alert('Ny månad är inte tillgänglig');
@@ -50,6 +58,8 @@ function reportTime() {
                 comment: comment,
             },
             month: month,
+            year: year,
+            noTime: noTime
         };
 
         $.post('/times', data)
@@ -73,6 +83,7 @@ function reportTime() {
                     }
                 });
                 calcTime();
+                setYear();
                 console.log(response);
             })
             .fail(function(err) {
@@ -99,8 +110,7 @@ function saveMonthlyTime() {
             'November',
             'December',
         ];
-        let currentTime = new Date();
-        let year = currentTime.getFullYear();
+
         let month = months[$('.monthDone').val() - 1] + ' - ' + year;
         let monthTimes = [];
         let dataStorage = { month, monthTimes };
@@ -127,6 +137,11 @@ function saveMonthlyTime() {
             const commentt = $(el)
                 .find('.commentDone')
                 .val();
+            const year = $(el)
+                .find('.year')
+                .val();
+            const noTime = $(el)
+                .find('.no-time').val();
 
             let data = {
                 from: {
@@ -145,6 +160,8 @@ function saveMonthlyTime() {
                     comment: commentt,
                 },
                 month: month,
+                year: year,
+                noTime: noTime
             };
 
             $.post('/time-bank', data)
@@ -162,10 +179,12 @@ function getMonthlyTime() {
     $('.get-monthly-time').submit(function(e) {
         e.preventDefault();
 
-        var month = $('.month-select').val();
+        let month = $('.month-select').val();
+        let year = $('.year-select').val();
 
-        var data = {
+        let data = {
             month: month,
+            year: year
         };
 
         $.post('/get-monthly-time', data)
@@ -196,6 +215,11 @@ function removeTime() {
             .closest('.day')
             .find('.time-item').length;
 
+
+        setTimeout(() => {
+            calcTime();
+        }, 100)
+
         if ($('.time-report').length) {
             $.post('/times/' + id)
                 .then(response => {
@@ -225,52 +249,17 @@ function removeTime() {
                 .closest('.day')
                 .addClass('d-none');
         }
+
+        if ($('#saved-time').length) {
+            $('.total-time-wrap').remove();
+            $('.remove-time-wrap').remove();
+        }
+
+        if ($('.time-report').length && $('.time-item').length == 1) {
+            $('.total-time-wrap').remove();
+        }
     });
 }
-
-// function showMonthlyTime() {
-//     $('.time-bank').on('click', 'h3', function() {
-//         let template = '';
-//         let selectedMonth = $(this).closest('div');
-//         let id = selectedMonth.data('id');
-
-//         resetHTML();
-
-//         $.post('/time-bank/' + id).then((response) => {
-//             for (let data of response.monthTimes) {
-
-//                 if (data.add) {
-//                     template += `<div class="time-item" data-id="${response._id}" data-day="${data.date.day}">
-//                      <div class="date">
-//                          <p class="d-none">${data.date.day}/${data.date.month}</p>
-//                      </div>
-//                      <div class="time">
-//                          <p class="m-0">Från: ${data.from.hour}:${data.from.minute} Till: ${data.to.hour}:${data.to.minute}</p>
-//                      </div>
-//                      <div class="comment">
-//                          <p class="m-0">Kommentar: ${data.add.comment}</p>
-//                      </div>
-//                      <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
-//                  </div>`;
-//                 } else {
-//                     template += `<div class="time-item" data-id="${response._id}" data-day="${data.date.day}">
-//                      <div class="date">
-//                          <p class="d-none">${data.date.day}/${data.date.month}</p>
-//                      </div>
-//                      <div class="time">
-//                          <p class="m-0">Från: ${data.from.hour}:${data.from.minute} Till: ${data.to.hour}:${data.to.minute}</p>
-//                      </div>
-//                      <a class="d-none remove-time btn btn-danger my-2">Ta bort</a>
-//                  </div>`;
-//                 }
-//             }
-//             $('.data-holder').html(template)
-//             sortItems();
-//         }).fail((err) => {
-//             console.log(err);
-//         });
-//     });
-// }
 
 function calcTime() {
     if (!$('.time-item').length) {
@@ -285,7 +274,7 @@ function calcTime() {
 
     $('.time-item').each(function(i, el) {
         let $el = $(el);
-
+        let noTime = $el.find('.no-time').val();
         let fromHour = parseInt($el.find('.time .fhDone').val() * 60);
         let fromMin = parseInt($el.find('.time .fmDone').val());
         let fromTime = fromHour + fromMin;
@@ -294,9 +283,13 @@ function calcTime() {
         let toTime = toHour + toMin;
         let timeSpent = toTime - fromTime;
 
-        timeThisMonth.push(timeSpent);
-    });
+        if (noTime == 'true') {
+            return;
+        } else {
+            timeThisMonth.push(timeSpent);
+        }
 
+    });
     let totalTimeThisMonth = (timeThisMonth.reduce((a, b) => a + b) / 60).toFixed(2);
 
     $('#total-time').html(totalTimeThisMonth);

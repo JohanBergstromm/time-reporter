@@ -29,7 +29,7 @@ router.post('/time-bank', function(req, res) {
 
 
 router.post('/get-monthly-time', async function(req, res) {
-    var monthTimes = await timeBank.find({ month: req.body.month });
+    var monthTimes = await timeBank.find({ month: req.body.month, year: req.body.year });
 
     if (typeof monthTimes !== 'undefined' && monthTimes.length > 0) {
         res.json(monthTimes);

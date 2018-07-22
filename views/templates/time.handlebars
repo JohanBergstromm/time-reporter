@@ -1,6 +1,6 @@
-<div class="time-item col-3" data-id="{{response._id}}" data-day="{{response.date.day}}">
-    <div class="date mb-2">
-        <p class="d-none">{{response.date.day}}/{{response.date.month}}</p>
+<div class="time-item col-3 d-flex flex-column justify-content-between mt-2" data-id="{{response._id}}" data-day="{{response.date.day}}">
+    <div class="date mb-2 d-none">
+        <p>{{response.date.day}}/{{response.date.month}}</p>
         <input type="hidden" class="dayDone" name="day" value="{{response.date.day}}">
         <input type="hidden" class="monthDone" name="month" value="{{response.date.month}}">
     </div>
@@ -10,6 +10,8 @@
         <input type="hidden" class="fmDone" name="fromMin" value="{{response.from.minute}}">
         <input type="hidden" class="thDone" name="toHour" value="{{response.to.hour}}">
         <input type="hidden" class="tmDone" name="toMin" value="{{response.to.minute}}">
+        <input type="hidden" class="year" name="year" value="{{response.year}}">
+        <input type="hidden" class="no-time" value="{{response.noTime}}">
     </div>
     {{#if response.add.comment}}
     <div class="comment">

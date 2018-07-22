@@ -76,7 +76,12 @@
                     <h4>Kommentar</h4>
                     <textarea id="comment" name="comment"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary mt-2">Lägg till</button>
+                <div class="d-flex flex-wrap justify-content-between align-items-center">
+                    <button type="submit" class="btn btn-primary mt-2">Lägg till</button>
+                    <div>
+                        <input type="checkbox" class="mr-2" id="no-time" /><span>Räkna ej med i total tid</span>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
@@ -90,16 +95,16 @@
                 <p class="font-italic">Total tid denna månad: <span id="total-time"></span> timmar</p>
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary">Klar</button>
+                <button type="submit" class="btn btn-primary">Spara månad</button>
             </div>
         </form>
     </div>
     <div class="time-wrap">
         <div class="row">
             {{#each times}}
-            <div class="time-item col-3" data-id="{{this._id}}" data-day="{{this.date.day}}">
-                <div class="date mb-2">
-                    <p class="d-none">{{this.date.day}}/{{this.date.month}}</p>
+            <div class="time-item col-3 d-flex flex-column justify-content-between mt-2" data-id="{{this._id}}" data-day="{{this.date.day}}">
+                <div class="date mb-2 d-none">
+                    <p>{{this.date.day}}/{{this.date.month}}</p>
                     <input type="hidden" class="dayDone" name="day" value="{{this.date.day}}">
                     <input type="hidden" class="monthDone" name="month" value="{{this.date.month}}">
                 </div>
@@ -110,10 +115,12 @@
                     <input type="hidden" class="fmDone" name="fromMin" value="{{this.from.minute}}">
                     <input type="hidden" class="thDone" name="toHour" value="{{this.to.hour}}">
                     <input type="hidden" class="tmDone" name="toMin" value="{{this.to.minute}}">
+                    <input type="hidden" class="year" name="year" value="{{this.year}}">
+                    <input type="hidden" class="no-time" name="noTime" value="{{this.noTime}}">
                 </div>
                 {{#if this.add.comment}}
                 <div class="comment">
-                    <p class="m-0">Kommentar: {{this.add.comment}}</p>
+                    <p class="m-0 small">Kommentar: {{this.add.comment}}</p>
                     <input type="hidden" class="commentDone" name="comment" value="{{this.add.comment}}">
                 </div>
                 {{/if}}

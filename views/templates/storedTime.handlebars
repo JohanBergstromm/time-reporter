@@ -1,8 +1,8 @@
 {{#each storages}}
     {{#each this.monthTimes}}
     <div class="time-item col-3" data-id="{{this._id}}" data-day="{{this.date.day}}">
-        <div class="date">
-            <p class="d-none">{{this.date.day}}/{{this.date.month}}</p>
+        <div class="date d-none">
+            <p>{{this.date.day}}/{{this.date.month}}</p>
         </div>
         <div class="time">
             <p class="m-0">Från: {{this.from.hour}}:{{this.from.minute}} Till: {{this.to.hour}}:{{this.to.minute}}</p>

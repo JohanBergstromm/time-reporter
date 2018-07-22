@@ -23,6 +23,7 @@
             border-right: 5px solid transparent;
             border-top: 5px solid #434652;
             transform: translateY(-50%);
+            pointer-events: none;
         }
     }
     select {
