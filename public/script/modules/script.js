@@ -189,7 +189,6 @@ function getMonthlyTime() {
 
         $.post('/get-monthly-time', data)
             .then(function(response) {
-                console.log(response);
 
                 let template = Handlebars.templates['monthlyTime']({ response });
 
@@ -202,13 +201,15 @@ function getMonthlyTime() {
                 console.log(template);
             })
             .fail(err => {
-                console.log(err);
+                let template = Handlebars.templates['errorMessage']({ err });
+                console.log(err.responseText);
+                $('.data-holder').html(template);
             });
     });
 }
 
 function removeTime() {
-    $('.time-report .days, .time-bank').on('click', '.remove-time', function() {
+    $('.time-report .days, #saved-time').on('click', '.remove-time', function() {
         var timeItem = $(this).closest('.time-item');
         var id = timeItem.data('id');
         var buttonLength = $(this)

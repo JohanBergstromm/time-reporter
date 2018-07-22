@@ -35,7 +35,7 @@ router.post('/get-monthly-time', async function(req, res) {
         res.json(monthTimes);
     } else {
         console.log('No time registered');
-        res.send('No time registered')
+        res.status(500).send('Det finns ingen tid registrerad för denna månad');
     }
 });
 

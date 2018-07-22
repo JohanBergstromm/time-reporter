@@ -1,5 +1,12 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+templates['errorMessage'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<div class=\"alert alert-danger\">\n    "
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.err : depth0)) != null ? stack1.responseText : stack1), depth0))
+    + "\n</div>";
+},"useData":true});
 templates['monthlyTime'] = template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
