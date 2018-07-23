@@ -5,9 +5,7 @@ const router = express.Router();
 
 router.get('/', async function(req, res) {
     // const bookings = await bookingModel.find();
-    res.render('index', {
-
-    });
+    res.render('login', {});
 });
 
 export default router;

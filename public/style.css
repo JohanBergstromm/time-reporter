@@ -2408,7 +2408,6 @@ h5 {
 
 .main-wrap {
   width: 100%;
-  padding: 15px 15px 15px 325px;
   position: relative; }
 
 .divider {
@@ -2425,6 +2424,9 @@ h5 {
 
 textarea {
   border-color: #434652; }
+
+input.form-control {
+  border-radius: 0; }
 
 button,
 a.btn {
@@ -2534,6 +2536,17 @@ a.btn-danger.remove-time {
   a.btn-danger.remove-time:hover {
     color: #fff;
     background: #d9534f; }
+
+.login-wrap {
+  height: 100vh; }
+  .login-wrap .form-wrap {
+    max-width: 60%;
+    margin: 0 auto; }
+  .login-wrap .logo img {
+    max-width: 120px;
+    margin: auto; }
+  .login-wrap .login-background {
+    background: #e3e3e3; }
 
 .navigation-wrap {
   width: 300px;

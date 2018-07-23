@@ -18,7 +18,7 @@ h5 {
 
 .main-wrap {
     width: 100%;
-    padding: 15px 15px 15px 325px;
+    //padding: 15px 15px 15px 325px;
     position: relative;
 }
 
@@ -38,6 +38,10 @@ h5 {
 
 textarea {
     border-color: #434652;
+}
+
+input.form-control {
+    border-radius: 0;
 }
 
 button,

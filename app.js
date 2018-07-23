@@ -18,11 +18,13 @@ const dbUrl = 'mongodb://localhost/time-reporter';
 
 mongoose.connect(dbUrl);
 
-mongoose.connection.on('open', () => {
-    console.log('Connected to mongo server.')
-}).on('error', (err) => {
-    console.log('Could not connect to mongo server.', err);
-});
+mongoose.connection
+    .on('open', () => {
+        console.log('Connected to mongo server.');
+    })
+    .on('error', err => {
+        console.log('Could not connect to mongo server.', err);
+    });
 
 // Create an express instance.
 const app = express();
@@ -30,11 +32,14 @@ const app = express();
 // Set handlebars as the view engine.
 const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);
-app.engine('handlebars', exphbs({
-    defaultLayout: 'main',
-    layoutsDir: path.join(viewsDir, 'layouts'),
-    partialsDir: path.join(viewsDir, 'partials')
-}));
+app.engine(
+    'handlebars',
+    exphbs({
+        defaultLayout: 'main',
+        layoutsDir: path.join(viewsDir, 'layouts'),
+        partialsDir: path.join(viewsDir, 'partials'),
+    })
+);
 app.set('view engine', 'handlebars');
 
 // Setup static paths
@@ -56,5 +61,5 @@ app.use('/', timeReport);
 const http = require('http').Server(app);
 
 http.listen(3000, () => {
-    console.log('Listening for connections to port: 3000')
+    console.log('Listening for connections to port: 3000');
 });

@@ -1,35 +1,29 @@
-<div class="main-wrap">
-    <div class="row">
-        <div class="col-12">
-    		<h2 class="mb-4">Tidsbank</h2>
+<h2 class="mb-4">Tidsbank</h2>
+<div id="saved-time">
+    <form class="get-monthly-time d-flex mb-4">
+        <div class="select-wrap mr-4">
+            <select class="month-select">
+              {{> months}}
+            </select>
         </div>
+        <div class="select-wrap mr-4">
+            <select class="year-select">
+              <option value="2018">2018</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Visa månad</button>
+    </form>
+	<div class="days">
+		<div class="row">
+			{{> days}}
+		</div>
     </div>
-    <div id="saved-time">
-        <form class="get-monthly-time d-flex mb-4">
-            <div class="select-wrap mr-4">
-                <select class="month-select">
-                  {{> months}}
-                </select>
-            </div>
-            <div class="select-wrap mr-4">
-                <select class="year-select">
-                  <option value="2018">2018</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Visa månad</button>
-        </form>
-    	<div class="days">
-    		<div class="row">
-    			{{> days}}
-    		</div>
-        </div>
-        <div class="data-holder">
-        </div>
-        <div class="total-time-wrap d-none">
-            <p class="font-italic">Total tid denna månad: <span id="total-time"></span> timmar</p>
-        </div>
-        <div class="remove-time-wrap d-none">
-            <a href="#" class="btn btn-danger remove-time">Ta bort månad</a>
-        </div>
+    <div class="data-holder">
+    </div>
+    <div class="total-time-wrap d-none">
+        <p class="font-italic">Total tid denna månad: <span id="total-time"></span> timmar</p>
+    </div>
+    <div class="remove-time-wrap d-none">
+        <a href="#" class="btn btn-danger remove-time">Ta bort månad</a>
     </div>
 </div>
