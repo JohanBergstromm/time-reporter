@@ -18,7 +18,7 @@ h5 {
 
 .main-wrap {
     width: 100%;
-    //padding: 15px 15px 15px 325px;
+    padding: 15px 15px 15px 325px;
     position: relative;
 }
 
@@ -47,4 +47,7 @@ input.form-control {
 button,
 a.btn {
     border-radius: 0 !important;
+    &:hover {
+        cursor: pointer;
+    }
 }

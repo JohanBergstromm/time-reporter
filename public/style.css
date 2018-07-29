@@ -2408,6 +2408,7 @@ h5 {
 
 .main-wrap {
   width: 100%;
+  padding: 15px 15px 15px 325px;
   position: relative; }
 
 .divider {
@@ -2431,6 +2432,9 @@ input.form-control {
 button,
 a.btn {
   border-radius: 0 !important; }
+  button:hover,
+  a.btn:hover {
+    cursor: pointer; }
 
 #saved-time .select-wrap {
   position: relative;

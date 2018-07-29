@@ -3,7 +3,7 @@ $(document).ready(function() {
     removeTime();
     reportTime();
     saveMonthlyTime();
-    // showMonthlyTime();
+    setYear();
     sortItems();
     if ($('.time-report').length) {
         calcTime();
@@ -204,12 +204,19 @@ function getMonthlyTime() {
                 let template = Handlebars.templates['errorMessage']({ err });
                 console.log(err.responseText);
                 $('.data-holder').html(template);
+                if ($('.alert.alert-danger').length) {
+                    setTimeout(() => {
+                        $('.alert.alert-danger').remove();
+                    }, 3000)
+                }
             });
     });
 }
 
 function removeTime() {
-    $('.time-report .days, #saved-time').on('click', '.remove-time', function() {
+    $('.time-report .days, #saved-time').on('click', '.remove-time', function(e) {
+        e.preventDefault();
+
         var timeItem = $(this).closest('.time-item');
         var id = timeItem.data('id');
         var buttonLength = $(this)
@@ -231,13 +238,13 @@ function removeTime() {
                     console.log(err);
                 });
         } else {
-            $('.time-bank .time-item').each(function(i, el) {
+            $('#saved-time .time-item').each(function(i, el) {
                 var id = $(el).data('id');
 
                 $.post('/time-bank/' + id)
                     .then(response => {
                         console.log(response);
-                        $('.time-bank .days').remove();
+                        $('#saved-time .days').remove();
                     })
                     .fail(err => {
                         console.log(err);
